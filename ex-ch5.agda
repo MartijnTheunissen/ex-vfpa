@@ -173,10 +173,15 @@ test₉ = refl
 -- Excercise 5.3
 
 {-
+-- This works (using the Iowa Agda Library)
 𝕍-to-𝕃-to-𝕍 : ∀ {ℓ} {n : ℕ} {A : Set ℓ} (vec : 𝕍 A n) → 𝕃-to-𝕍 (𝕍-to-𝕃 vec) ≡ (n , vec)
 𝕍-to-𝕃-to-𝕍 [] = refl
 𝕍-to-𝕃-to-𝕍 {n = suc n} (x :: vec) rewrite 𝕍-to-𝕃-to-𝕍 vec = refl
 -}
 
-vec-list-vec-same : ∀ {ℓ} {n : ℕ} {A : Set ℓ} (vec : Vec A n) → fromList (toList vec) ≡ vec
-vec-list-vec-same = ?
+-- This does not work. Agda complains with:
+-- n != Data.List.Base.foldr (λ _ → suc) 0 (toList vec) of type ℕ
+-- When checking that the expression vec has type Vec A (.Data.List.Base.length (toList vec))
+
+-- vec-list-vec-same : ∀ {ℓ} {n : ℕ} {A : Set ℓ} (vec : Vec A n) → fromList (toList vec) ≡ vec
+-- vec-list-vec-same = ?
