@@ -3,6 +3,8 @@ module ex-ch5 where
 open import Data.Nat
 open import Data.Nat.Properties
 open import Data.Vec
+open import Data.Sum
+open import Data.Product
 open import Relation.Binary.PropositionalEquality
 
 -- Excercise 5.1
@@ -185,3 +187,10 @@ test₉ = refl
 
 -- vec-list-vec-same : ∀ {ℓ} {n : ℕ} {A : Set ℓ} (vec : Vec A n) → fromList (toList vec) ≡ vec
 -- vec-list-vec-same = ?
+
+-- Excercise 5.4
+
+-- Alternatively (and probably a better idea) would be to use Product.map ∷ instead
+vector-unzip : ∀ {ℓ ℓ'} {n : ℕ} {A : Set ℓ} {B : Set ℓ'} → Vec (A × B) n → (Vec A n) × (Vec B n)
+vector-unzip [] = [] , []
+vector-unzip ((p₁ , p₂) ∷ vec) = p₁ ∷ proj₁ (vector-unzip vec) , p₂ ∷ proj₂ (vector-unzip vec)
