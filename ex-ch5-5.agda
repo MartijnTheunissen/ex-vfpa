@@ -31,9 +31,9 @@ bst-remove d (bst-node d' lbst rbst lb rb) with keep (d ≤A d')
 bst-remove d (bst-node d' lbst rbst lb rb) | tt , p with keep (d' ≤A d)
 bst-remove d (bst-node d' (bst-leaf x) (bst-leaf x₁) lb rb) | tt , b₁ | tt , b = bst-leaf (≤A-trans (≤A-trans (≤A-trans lb x) x₁) rb) -- d=d'; two leaves => replace with leaf
 bst-remove d (bst-node d' (bst-leaf x) (bst-node d₁ lbst rbst lb' rb') lb rb) | tt , b₁ | tt , b = bst-node d₁ lbst rbst (≤A-trans (≤A-trans lb x) lb') (≤A-trans rb' rb) -- d=d'; leaf-node => replace with right branch
-bst-remove d (bst-node d' (bst-node d₁ lbst rbst lb' rb') (bst-leaf x₂) lb rb) | tt , b₁ | tt , b = bst-node d₁ lbst rbst (≤A-trans lb lb') (≤A-trans (≤A-trans rb' x₂) rb) --d=d'; node-leaf => replace with left branch
+bst-remove d (bst-node d' (bst-node d₁ lbst rbst lb' rb') (bst-leaf x₂) lb rb) | tt , b₁ | tt , b = bst-node d₁ lbst rbst (≤A-trans lb lb') (≤A-trans (≤A-trans rb' x₂) rb) -- d=d'; node-leaf => replace with left branch
 bst-remove d (bst-node d' lnode rnode lb rb) | tt , b₁ | tt , b with keep(bst-get-min rnode)
-bst-remove d (bst-node d' lnode rnode lb rb) | tt , b₂ | tt , b₁ | just x , b = {!!} --{!bst-node (bst-get-min rnode ) lnode (bst-remove-min rnode) ? ?!}
+bst-remove d (bst-node d' lnode rnode lb rb) | tt , b₂ | tt , b₁ | just x , b = {!!} -- {!bst-node (bst-get-min rnode ) lnode (bst-remove-min rnode) ? ?!}
 bst-remove d (bst-node d' lnode rnode lb rb) | tt , b₂ | tt , b₁ | nothing , b = bst-node d' lnode rnode lb rb -- shouldn't occur?
 bst-remove d (bst-node d' lbst rbst lb rb) | tt , b₁ | ff , b = bst-node d' (bst-remove d lbst) rbst lb rb -- d<d' remove in left branch
 bst-remove d (bst-node d' lbst rbst lb rb) | ff , p = bst-node d' lbst (bst-remove d rbst) lb rb -- d>d' is larger, remove in right branch
